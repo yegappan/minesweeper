@@ -1,0 +1,77 @@
+*minesweeper.txt*  Minesweeper for Vim9                              Feb 16, 2026
+
+Minesweeper
+===========
+
+Minesweeper is a classic logic game. Reveal safe cells, avoid mines, and mark all
+mines with flags to win. The game runs inside a popup window and supports both
+terminal and GUI Vim.
+
+Installation
+============
+
+Use your preferred plugin manager, or install as a Vim package.
+
+Vim package:
+  1. Copy this plugin to:
+     ~/.vim/pack/downloads/opt/minesweeper
+  2. Add the following line to ~/.vimrc:
+     packadd minesweeper
+  3. Restart Vim.
+  
+Windows:
+  1. Copy this plugin to:
+     $HOME\vimfiles\pack\downloads\opt\minesweeper
+  2. Add the following line to ~/.vimrc:
+     packadd minesweeper
+  3. Restart Vim.
+
+Commands
+========
+
+:Minesweeper
+    Start a game with the default difficulty.
+
+:MinesweeperEasy
+    Start an easy game.
+
+:MinesweeperMedium
+    Start a medium game.
+
+:MinesweeperHard
+    Start a hard game.
+
+Keys
+====
+
+Movement
+  h, j, k, l         Move left, down, up, right.
+  Arrow keys         Move in the corresponding direction.
+
+Actions
+  <Space> or <Enter> Reveal the current cell.
+  f                  Toggle a flag on the current cell.
+  r                  Restart the game with the same difficulty.
+  q or <Esc>         Quit the game.
+
+Configuration
+=============
+
+You can set these variables before starting the game:
+
+  g:minesweeper_width
+  g:minesweeper_height
+  g:minesweeper_mines
+
+Example:
+  let g:minesweeper_width = 16
+  let g:minesweeper_height = 16
+  let g:minesweeper_mines = 40
+
+Notes
+=====
+
+- The game declares a win when all mines are flagged.
+- The popup window shows time elapsed and remaining mine count.
+
+vim:tw=78:et:ft=help
