@@ -201,7 +201,27 @@ export class Board
 
   # Check if player has won
   def IsWon(): bool
-    return this.flagCount == this.mineCount
+    if this.revealedCount != (this.width * this.height - this.mineCount)
+      return false
+    endif
+
+    if this.flagCount != this.mineCount
+      return false
+    endif
+
+    for row in range(this.height)
+      for col in range(this.width)
+        var cell = this.cells[row][col]
+        if cell.isMine && !cell.isFlagged
+          return false
+        endif
+        if !cell.isMine && !cell.isRevealed
+          return false
+        endif
+      endfor
+    endfor
+
+    return true
   enddef
 
   # Reveal all mines (for game over)

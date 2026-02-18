@@ -72,6 +72,11 @@ export class Game
     endif
 
     this.board.ToggleFlag(row, col)
+
+    if this.board.IsWon()
+      this.state = BoardModule.GameState.WON
+      this.endTime = localtime()
+    endif
   enddef
 
   # Move cursor
