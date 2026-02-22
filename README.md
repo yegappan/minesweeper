@@ -9,37 +9,28 @@ A fully-featured Minesweeper game written in Vim9script, showcasing modern Vim9 
 
 ## Installation
 
-### Using vim-plug
+You can install this plugin directly from github using the following steps:
 
-```vim
-Plug 'yourusername/minesweeper'
-```
+   **Unix/Linux/macOS:**
+   ```bash
+   git clone https://github.com/yegappan/minesweeper.git $HOME/.vim/pack/downloads/opt/minesweeper
+   vim -u NONE -c "helptags $HOME/.vim/pack/downloads/opt/minesweeper/doc" -c q
+   ```
 
-### Manual Installation (Vim packages)
+   **Windows:**
+   ```cmd
+   git clone https://github.com/yegappan/minesweeper.git %USERPROFILE%\vimfiles\pack\downloads\opt\minesweeper
+   vim -u NONE -c "helptags $HOME/vimfiles/pack/downloads/opt/minesweeper/doc" -c q
+   ```
 
-Linux/macOS:
+After installing the plugin using the above steps, add the following line to
+the $HOME/.vimrc (Unix/Linux/macOS) or the $HOME/_vimrc (Windows) file:
 
-```
-~/.vim/pack/downloads/opt/minesweeper
-```
-
-Add this to your ~/.vimrc:
-
-```vim
+```viml
 packadd minesweeper
 ```
 
-Windows:
-
-```
-$HOME\vimfiles\pack\downloads\opt\minesweeper
-```
-
-Add this to your ~/.vimrc:
-
-```vim
-packadd minesweeper
-```
+You can also install and manage this plugin using any one of the Vim plugin managers (dein.vim, pathogen, vam, vim-plug, volt, Vundle, etc.).
 
 ## Usage
 
