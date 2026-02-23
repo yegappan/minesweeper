@@ -1,14 +1,29 @@
-*minesweeper.txt*  Minesweeper for Vim9                              Feb 16, 2026
+*minesweeper.txt*  Minesweeper for Vim9
 
-Minesweeper
-===========
+================================================================================
+CONTENTS                                            *minesweeper-contents*
 
-Minesweeper is a classic logic game. Reveal safe cells, avoid mines, and mark all
-mines with flags to win. The game runs inside a popup window and supports both
-terminal and GUI Vim.
+  1. Introduction .......................... |minesweeper-intro|
+  2. Installation .......................... |minesweeper-install|
+  3. Commands ............................. |minesweeper-commands|
+  4. Controls ............................. |minesweeper-controls|
+  5. Game Rules ........................... |minesweeper-rules|
+  6. Configuration ........................ |minesweeper-config|
+  7. Vim9 Script Features ................. |minesweeper-vim9|
 
-Installation
-============
+================================================================================
+1. INTRODUCTION                                     *minesweeper-intro*
+
+Minesweeper is a classic logic puzzle game implemented in Vim9script. Reveal
+safe cells by deducing which cells contain mines based on the numbers revealed.
+Each number tells you how many mines are adjacent to that cell. Flag all mines
+correctly to win the game.
+
+The game runs in a centered popup window and supporting three difficulty levels
+(Easy, Medium, Hard) with customizable board dimensions and mine counts.
+
+================================================================================
+2. INSTALLATION                                    *minesweeper-install*
 
 Requirements~
 
@@ -84,53 +99,124 @@ Then run `:PlugInstall` and `:helptags ALL`
 For other plugin managers (Vundle, Pathogen, etc.), follow their standard
 installation procedures for local plugins.
 
-
-Commands
-========
+================================================================================
+3. COMMANDS                                       *minesweeper-commands*
 
 :Minesweeper
-    Start a game with the default difficulty.
+    Start a game with the default difficulty (Medium).
 
 :MinesweeperEasy
-    Start an easy game.
+    Start an easy game (smaller board, fewer mines).
 
 :MinesweeperMedium
-    Start a medium game.
+    Start a medium difficulty game.
 
 :MinesweeperHard
-    Start a hard game.
+    Start a hard game (larger board, more mines).
 
-Keys
-====
+================================================================================
+4. CONTROLS                                        *minesweeper-controls*
 
-Movement
-  h, j, k, l         Move left, down, up, right.
-  Arrow keys         Move in the corresponding direction.
+Movement:
+  h or <Left>     Move left
+  j or <Down>     Move down
+  k or <Up>       Move up
+  l or <Right>    Move right
 
-Actions
-  <Space> or <Enter> Reveal the current cell.
-  f                  Toggle a flag on the current cell.
-  r                  Restart the game with the same difficulty.
-  q or <Esc>         Quit the game.
+Actions:
+  <Space> or      Reveal the current cell
+  <Enter>
+  f               Toggle flag on the current cell
+  r               Restart the game with the same difficulty
+  q or <Esc>      Quit the game
 
-Configuration
-=============
+================================================================================
+5. GAME RULES                                      *minesweeper-rules*
 
-You can set these variables before starting the game:
+Objective~
+Reveal all non-mine cells without detonating any mines. Flag all mines
+correctly to win.
 
-  g:minesweeper_width
-  g:minesweeper_height
-  g:minesweeper_mines
+How to Play~
+1. Start with a hidden grid of cells
+2. Reveal cells by pressing <Space> or <Enter>
+3. Each revealed cell shows:
+   • A number (1-8): count of adjacent mines
+   • Empty: no adjacent mines
+   • Mine: game over (you lose)
+4. Use the numbers to deduce where mines are located
+5. Flag suspected mines with 'f' to mark them safely
+6. Win by revealing all non-mine cells
+
+Win Condition~
+Reveal all non-mine cells and flag all mines correctly.
+
+Lose Condition~
+Reveal a cell containing a mine.
+
+Difficulty Levels~
+
+Easy:     Small board with few mines (fewer logical deductions needed)
+Medium:   Standard board with moderate mine density
+Hard:     Large board with many mines (requires careful analysis)
+
+================================================================================
+6. CONFIGURATION                                   *minesweeper-config*
+
+You can customize the game board before starting by setting these variables:
+
+g:minesweeper_width                             *g:minesweeper_width*
+    Width of the game board in cells. Default: depends on difficulty
+
+g:minesweeper_height                            *g:minesweeper_height*
+    Height of the game board in cells. Default: depends on difficulty
+
+g:minesweeper_mines                             *g:minesweeper_mines*
+    Number of mines on the board. Default: depends on difficulty
 
 Example:
-  let g:minesweeper_width = 16
-  let g:minesweeper_height = 16
-  let g:minesweeper_mines = 40
+>
+    let g:minesweeper_width = 16
+    let g:minesweeper_height = 16
+    let g:minesweeper_mines = 40
+    :Minesweeper
+<
 
-Notes
-=====
+================================================================================
+7. VIM9 SCRIPT FEATURES                          *minesweeper-vim9*
 
-- The game declares a win when all mines are flagged.
-- The popup window shows time elapsed and remaining mine count.
+This plugin demonstrates several modern Vim9script capabilities:
 
-vim:tw=78:et:ft=help
+Classes~
+  • Board: Grid state management and mine placement
+  • MinesweeperGame: Core game logic and turn progression
+  • GameUI: Popup window management and rendering
+
+Type System~
+  • Type annotations for all function parameters and return types
+  • Enums for cell states (Hidden, Revealed, Flagged, Mine)
+  • Enums for difficulty levels (Easy, Medium, Hard)
+  • Type aliases for board representation
+
+Algorithms~
+  • Randomization for mine placement across the board
+  • Flood-fill algorithm for auto-revealing adjacent empty cells
+  • Constraint-based flagging based on numeric clues
+  • Win condition validation (all non-mines revealed)
+
+Features~
+  • Popup windows for centered, clean UI
+  • Dynamic board sizing based on difficulty level
+  • Efficient mine revelation with automatic cascading
+  • Type-safe input handling and board validation
+  • Modular architecture separating game logic from UI
+
+Design Patterns~
+  • Singleton pattern for game instance management
+  • Model-View separation for clean architecture
+  • Factory pattern for difficulty-based board creation
+  • State machine for game phases (Setup, Playing, GameOver)
+
+================================================================================
+
+vim:tw=78:ts=8:ft=help:norl:
